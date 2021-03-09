@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const route = require('./route');
 const app = express();
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -18,7 +19,7 @@ app.use(function(req, res) {
 });
 
 
-const uri = "mongodb+srv://blog-app:bl0g@pp@blog-app.wy9e4.mongodb.net/blog-app-2?retryWrites=true&w=majority";
+const uri = process.env.MONGO_URI;
 mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
