@@ -38,7 +38,7 @@ class RestRoute{
                 res.status(200).json(result);
             }).exec();
 
-            console.log('on put', result, req.bo);
+            console.log('on put', result, req.body);
         });
         console.log(`delete: /${this.collectionName}/:id`)
         this.router.delete(`/${this.collectionName}/:id`, async (req, res) => {
