@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
+const passport = require('passport');
+const { pass } = require('./extracting-user-strategy');
+const strategy = require('./extracting-user-strategy');
+passport.use(strategy);
 
-class RestRoute{
+class RestRoute {
     constructor(router, model, collectionName) {
         this.router = router;
         this.model = model;
@@ -18,7 +22,10 @@ class RestRoute{
         });
         
         console.log(`post: /${this.collectionName}`)
-        this.router.post(`/${this.collectionName}`, async (req, res) => {
+        this.router.post(
+            `/${this.collectionName}`, 
+            passport.authenticate('jwt', {session: false})
+        ,async (req, res) => {
             this.create(req, res);
         });
         
